@@ -1,61 +1,77 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
 
-interface User {
-  id: number;
+interface UserProfile {
+  userId: string;
   name: string;
-  username: string;
   email: string;
   phone: string;
-  website: string;
-  // add other fields you want to show
+  address: string;
+  initials: string;
 }
 
-const Profile = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+const user: UserProfile = {
+  userId: '12345687',
+  name: 'Ervin Howell',
+  email: 'ervinhowell@gmail.com',
+  phone: '96068 12345',
+  address: 'voluptate iusto quis nobis reprehenderit…',
+  initials: 'EH',
+};
 
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.length > 0) {
-          setUser(data[0]); // first record only
-        }
-        setLoading(false);
-      });
-  }, []);
-
+const ProfilePage: React.FC = () => {
   return (
-    <div className="p-4 max-w-md mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Profile</h1>
-      {loading ? (
-        <p>Loading user profile...</p>
-      ) : user ? (
-        <div className="border p-4 rounded shadow">
-          <p>
-            <strong>Name:</strong> {user.name}
-          </p>
-          <p>
-            <strong>Username:</strong> {user.username}
-          </p>
-          <p>
-            <strong>Email:</strong> {user.email}
-          </p>
-          <p>
-            <strong>Phone:</strong> {user.phone}
-          </p>
-          <p>
-            <strong>Website:</strong>{" "}
-            <a href={`http://${user.website}`} target="_blank" rel="noreferrer">
-              {user.website}
-            </a>
-          </p>
+    <div className="min-h-screen bg-gray-100 font-sans">
+      {/* Header */}
+      <div className="bg-[#1C1F4A] text-white px-6 py-4 flex justify-between items-center">
+        <h1 className="text-xl font-semibold">SWIFT</h1>
+        <div className="flex items-center space-x-2">
+          <div className="bg-gray-700 rounded-full w-8 h-8 flex items-center justify-center">
+            <span className="text-sm font-medium">{user.initials}</span>
+          </div>
+          <span className="text-sm">{user.name}</span>
         </div>
-      ) : (
-        <p>No user data found.</p>
-      )}
+      </div>
+
+      {/* Content */}
+      <div className="max-w-4xl mx-auto mt-10 bg-white p-6 rounded shadow">
+        <h2 className="text-lg font-semibold mb-4">Welcome, {user.name}</h2>
+
+        <div className="flex items-start space-x-6">
+          {/* Avatar and email */}
+          <div className="flex flex-col items-center">
+            <div className="bg-gray-200 rounded-full w-16 h-16 flex items-center justify-center text-xl font-bold text-gray-700">
+              {user.initials}
+            </div>
+            <p className="mt-2 text-sm text-gray-600">{user.email}</p>
+          </div>
+
+          {/* Profile details */}
+          <div className="grid grid-cols-2 gap-4 flex-1">
+            <div>
+              <label className="text-xs text-gray-500">User ID</label>
+              <p className="text-sm font-medium">{user.userId}</p>
+            </div>
+            <div>
+              <label className="text-xs text-gray-500">Name</label>
+              <p className="text-sm font-medium">{user.name}</p>
+            </div>
+            <div>
+              <label className="text-xs text-gray-500">Email ID</label>
+              <p className="text-sm font-medium">{user.email}</p>
+            </div>
+            <div>
+              <label className="text-xs text-gray-500">Address</label>
+              <p className="text-sm font-medium">{user.address}</p>
+            </div>
+            <div>
+              <label className="text-xs text-gray-500">Phone</label>
+              <p className="text-sm font-medium">{user.phone}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Profile;
+export default ProfilePage;
