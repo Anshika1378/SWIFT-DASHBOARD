@@ -67,3 +67,5 @@ export default tseslint.config([
   },
 ])
 ```
+# Author 
+Anshika Agarwal
