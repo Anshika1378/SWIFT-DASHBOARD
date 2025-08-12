@@ -208,7 +208,7 @@ const Dashboard = () => {
               <tr className="bg-gray-100 text-left">
                 <th className="border px-4 py-2">Post ID</th>
                 <th className="border px-4 py-2">Name</th>
-                <th className="border px-4 py-2">Just Email</th>
+                <th className="border px-4 py-2"> Email</th>
                 <th className="border px-4 py-2">Comment</th>
               </tr>
             </thead>
